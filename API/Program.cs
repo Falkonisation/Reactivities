@@ -20,6 +20,12 @@ internal class Program
         // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
         builder.Services.AddEndpointsApiExplorer();
         builder.Services.AddSwaggerGen();
+        builder.Services.AddCors(options =>
+            {
+                options.AddPolicy("CorsPolicy",policy=>{
+                    policy.AllowAnyMethod().AllowAnyHeader().WithOrigins("http://localhost:3000");
+                });
+            });
 
         var app = builder.Build();
 
@@ -32,6 +38,7 @@ internal class Program
         }
 
         app.UseHttpsRedirection();
+        app.UseCors("CorsPolicy");
 
         app.UseAuthorization();
 
