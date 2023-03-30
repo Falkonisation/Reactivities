@@ -1,5 +1,9 @@
 using Persistence;
 using Microsoft.EntityFrameworkCore;
+using Application.Activities;
+using MediatR;
+using Application.Core;
+using API.Extensions;
 
 internal class Program
 {
@@ -8,7 +12,7 @@ internal class Program
         var builder = WebApplication.CreateBuilder(args);
 
         // Add services to the container.
-
+/*
         builder.Services.AddControllers();
 
         builder.Services.AddDbContext<DataContext>(options =>
@@ -26,7 +30,9 @@ internal class Program
                     policy.AllowAnyMethod().AllowAnyHeader().WithOrigins("http://localhost:3000");
                 });
             });
-
+        builder.Services.AddMediatR(typeof(List.Handler).Assembly);
+        builder.Services.AddAutoMapper(typeof(MappingProfiles).Assembly);
+*/      ApplicationServiceExtensions.Addservices(builder);
         var app = builder.Build();
 
 
